@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Undangan Pernikahan Digital - Aris & Amira</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
     <style>
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
         .font-serif { font-family: 'Cormorant Garamond', serif; }
         .font-playfair { font-family: 'Playfair Display', serif; }
         .bg-lavender { background-color: #f3f0f7; }
@@ -39,7 +39,7 @@
         }
         .cover-off { transform: translateY(-100%); }
         
-        /* Love Story Timeline - Scaled Down */
+        /* Love Story Timeline - Optimized for Mobile */
         .timeline-container { position: relative; padding: 1rem 0; }
         .timeline-container::after {
             content: ''; position: absolute; width: 1px; background: #4a2c6a;
@@ -56,11 +56,15 @@
         .right { left: 50%; text-align: left; }
         .right::after { left: -10px; }
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 640px) {
             .timeline-container::after { left: 20px; }
-            .timeline-item { width: 100%; padding-left: 45px; padding-right: 15px; text-align: left; }
+            .timeline-item { width: 100%; padding-left: 45px; padding-right: 15px; text-align: left; margin-bottom: 10px; }
             .timeline-item::after { left: 10px; }
-            .left { left: 0; }
+            .left { left: 0; text-align: left; }
+            
+            /* Typography Scaling */
+            h1 { font-size: 2.75rem !important; }
+            .couple-img { width: 120px !important; height: 120px !important; }
         }
 
         .floating { animation: floating 3s ease-in-out infinite; }
@@ -75,13 +79,26 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
-        /* Custom image size for side-by-side */
         .couple-img {
             width: 140px; height: 140px;
             object-fit: cover;
             border: 4px solid rgba(74, 44, 106, 0.1);
             border-radius: 999px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Smooth Fade In */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease forwards; }
+
+        /* Mobile specific swiper fix */
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -93,16 +110,16 @@
         <source src="music1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- COVER SECTION - Compact Font -->
+    <!-- COVER SECTION -->
     <div id="cover">
-        <div class="text-center text-white p-6" data-aos="zoom-out" data-aos-duration="1500">
+        <div class="text-center text-white p-6 max-w-sm" data-aos="zoom-out" data-aos-duration="1500">
             <div class="mb-4 inline-block border border-white/30 p-3 rounded-full floating">
                 <i class="fa-solid fa-heart text-xl animate-pulse"></i>
             </div>
-            <h2 class="text-sm uppercase tracking-[0.4em] mb-2 font-light">The Wedding Of</h2>
-            <h1 class="text-5xl font-playfair mb-4 italic">Aris & Amira</h1>
-            <p class="mb-8 text-sm font-light tracking-widest opacity-80">Kepada Bapak/Ibu/Saudara/i</p>
-            <button onclick="openInvitation()" class="bg-white text-purple-dark px-8 py-3 rounded-full text-sm font-bold shadow-xl hover:bg-purple-dark hover:text-white transition-all duration-500">
+            <h2 class="text-[10px] sm:text-sm uppercase tracking-[0.4em] mb-2 font-light">The Wedding Of</h2>
+            <h1 class="text-5xl font-playfair mb-4 italic leading-tight">Aris & Amira</h1>
+            <p class="mb-8 text-xs font-light tracking-widest opacity-80 px-4">Kepada Bapak/Ibu/Saudara/i Kami Mengundang Anda</p>
+            <button onclick="openInvitation()" class="bg-white text-purple-dark px-10 py-3.5 rounded-full text-xs font-bold shadow-xl active:scale-95 transition-all duration-300">
                 <i class="fa-solid fa-envelope-open-text mr-2"></i> BUKA UNDANGAN
             </button>
         </div>
@@ -110,8 +127,8 @@
 
     <main id="main-content" class="hidden">
         
-        <!-- HERO SECTION - Side by Side Couple -->
-        <section class="min-h-[80vh] flex flex-col justify-center items-center text-center p-6 bg-white relative overflow-hidden">
+        <!-- HERO SECTION -->
+        <section class="min-h-[90vh] flex flex-col justify-center items-center text-center p-6 bg-white relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png');"></div>
             
             <div class="flex items-center justify-center gap-4 mb-8" data-aos="zoom-in">
@@ -127,43 +144,43 @@
             </div>
             
             <h2 class="text-3xl font-playfair text-purple-dark mb-2 italic" data-aos="fade-up">Aris & Amira</h2>
-            <p class="text-gray-400 tracking-[0.3em] text-[10px] mb-6 uppercase" data-aos="fade-up" data-aos-delay="200">Kamis, 25 Desember 2025</p>
+            <p class="text-gray-400 tracking-[0.3em] text-[10px] mb-8 uppercase" data-aos="fade-up" data-aos-delay="200">Kamis, 25 Desember 2025</p>
             
-            <!-- Sosmed Lainnya -->
-            <div class="flex flex-wrap justify-center gap-6 text-[10px] text-purple-dark/60 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="400">
+            <!-- Sosmed Lainnya - Grid Layout for Mobile -->
+            <div class="grid grid-cols-2 gap-x-8 gap-y-6 text-[10px] text-purple-dark/60 uppercase tracking-widest max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="400">
                 <div class="flex flex-col items-center gap-1">
-                    <a href="#" class="hover:text-purple-dark text-lg"><i class="fa-brands fa-instagram"></i></a>
-                    <span>@arisamira</span>
+                    <a href="#" class="hover:text-purple-dark text-xl"><i class="fa-brands fa-instagram"></i></a>
+                    <span class="truncate w-full text-center">@arisamira</span>
                 </div>
                 <div class="flex flex-col items-center gap-1">
-                    <a href="#" class="hover:text-purple-dark text-lg"><i class="fa-brands fa-tiktok"></i></a>
-                    <span>@aris_amira</span>
+                    <a href="#" class="hover:text-purple-dark text-xl"><i class="fa-brands fa-tiktok"></i></a>
+                    <span class="truncate w-full text-center">@aris_amira</span>
                 </div>
                 <div class="flex flex-col items-center gap-1">
-                    <a href="#" class="hover:text-purple-dark text-lg"><i class="fa-brands fa-whatsapp"></i></a>
-                    <span>0812345678</span>
+                    <a href="#" class="hover:text-purple-dark text-xl"><i class="fa-brands fa-whatsapp"></i></a>
+                    <span class="truncate w-full text-center">0812345678</span>
                 </div>
                 <div class="flex flex-col items-center gap-1">
-                    <a href="#" class="hover:text-purple-dark text-lg"><i class="fa-brands fa-facebook"></i></a>
-                    <span>Aris Amira</span>
+                    <a href="#" class="hover:text-purple-dark text-xl"><i class="fa-brands fa-facebook"></i></a>
+                    <span class="truncate w-full text-center">Aris Amira</span>
                 </div>
             </div>
         </section>
 
-        <!-- COUNTDOWN SECTION - Smaller Cards -->
-        <section class="py-12 bg-purple-dark text-white relative">
+        <!-- COUNTDOWN SECTION -->
+        <section class="py-10 bg-purple-dark text-white relative">
             <div class="container mx-auto px-4 text-center">
-                <h3 class="mb-8 font-serif text-xl italic tracking-widest opacity-90" data-aos="fade-down">Menghitung Hari Bahagia</h3>
+                <h3 class="mb-6 font-serif text-lg italic tracking-widest opacity-90" data-aos="fade-down">Menghitung Hari Bahagia</h3>
                 <div class="flex justify-center gap-3 text-center">
-                    <div class="glass-card p-3 rounded-xl w-16 shadow-lg" data-aos="flip-up">
+                    <div class="glass-card p-3 rounded-2xl w-16 shadow-lg" data-aos="flip-up">
                         <span id="days" class="text-xl font-bold block text-purple-dark">00</span>
                         <p class="text-[8px] uppercase tracking-widest text-gray-500 font-bold">Hari</p>
                     </div>
-                    <div class="glass-card p-3 rounded-xl w-16 shadow-lg" data-aos="flip-up" data-aos-delay="100">
+                    <div class="glass-card p-3 rounded-2xl w-16 shadow-lg" data-aos="flip-up" data-aos-delay="100">
                         <span id="hours" class="text-xl font-bold block text-purple-dark">00</span>
                         <p class="text-[8px] uppercase tracking-widest text-gray-500 font-bold">Jam</p>
                     </div>
-                    <div class="glass-card p-3 rounded-xl w-16 shadow-lg" data-aos="flip-up" data-aos-delay="200">
+                    <div class="glass-card p-3 rounded-2xl w-16 shadow-lg" data-aos="flip-up" data-aos-delay="200">
                         <span id="minutes" class="text-xl font-bold block text-purple-dark">00</span>
                         <p class="text-[8px] uppercase tracking-widest text-gray-500 font-bold">Menit</p>
                     </div>
@@ -171,14 +188,15 @@
             </div>
         </section>
 
-        <!-- LOVE STORY - Scaled Down Text -->
+        <!-- LOVE STORY -->
         <section class="py-16 bg-white overflow-hidden">
-            <div class="text-center mb-10" data-aos="fade-up">
+            <div class="text-center mb-10 px-4" data-aos="fade-up">
                 <h2 class="text-2xl font-playfair text-purple-dark italic">Our Love Story</h2>
                 <div class="w-12 h-0.5 bg-purple-dark mx-auto mt-2 rounded-full opacity-20"></div>
+                <p class="text-[10px] text-gray-400 mt-4 tracking-widest uppercase italic">Bagaimana Kami Bertemu</p>
             </div>
 
-            <div class="timeline-container max-w-2xl mx-auto px-4">
+            <div class="timeline-container max-w-sm mx-auto px-4">
                 <div class="timeline-item left" data-aos="fade-right">
                     <div class="bg-lavender p-4 rounded-xl shadow-sm border-b-2 border-purple-dark">
                         <h4 class="text-purple-dark font-bold text-sm mb-1">Pertama Bertemu</h4>
@@ -203,126 +221,126 @@
             </div>
         </section>
 
-        <!-- EVENTS - Side by Side -->
+        <!-- EVENTS -->
         <section class="py-16 px-4 bg-lavender">
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-md text-center group" data-aos="fade-up">
+            <div class="max-w-md mx-auto grid grid-cols-1 gap-6">
+                <div class="bg-white p-6 rounded-3xl shadow-md text-center border-t-4 border-purple-dark" data-aos="fade-up">
                     <h3 class="text-xl font-serif text-purple-dark mb-4">Akad Nikah</h3>
                     <div class="text-[12px] text-gray-600 space-y-1">
-                        <p class="font-bold text-purple-dark">08.00 - 10.00 WIB</p>
+                        <p class="font-bold text-purple-dark text-sm">08.00 - 10.00 WIB</p>
                         <p>Minggu, 25 Des 2025</p>
-                        <p class="pt-2"><i class="fa-solid fa-location-dot mr-1"></i>Masjid Agung Al-Mubarak</p>
+                        <p class="pt-3 px-4 leading-relaxed"><i class="fa-solid fa-location-dot text-purple-dark mr-1"></i>Masjid Agung Al-Mubarak, Pusat Kota</p>
                     </div>
-                    <a href="#" class="inline-block mt-4 text-[10px] border border-purple-dark px-4 py-1.5 rounded-full text-purple-dark hover:bg-purple-dark hover:text-white transition-all">Lihat Peta</a>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block mt-6 text-[10px] font-bold uppercase tracking-widest bg-purple-dark/10 border border-purple-dark/20 px-8 py-2.5 rounded-full text-purple-dark active:bg-purple-dark active:text-white transition-all">Lihat Peta</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-md text-center group" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-white p-6 rounded-3xl shadow-md text-center border-t-4 border-purple-dark" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-xl font-serif text-purple-dark mb-4">Resepsi</h3>
                     <div class="text-[12px] text-gray-600 space-y-1">
-                        <p class="font-bold text-purple-dark">11.00 WIB - Selesai</p>
+                        <p class="font-bold text-purple-dark text-sm">11.00 WIB - Selesai</p>
                         <p>Minggu, 25 Des 2025</p>
-                        <p class="pt-2"><i class="fa-solid fa-location-dot mr-1"></i>Grand Ballroom Hotel Purple</p>
+                        <p class="pt-3 px-4 leading-relaxed"><i class="fa-solid fa-location-dot text-purple-dark mr-1"></i>Grand Ballroom Hotel Purple, Jl. Melati No. 1</p>
                     </div>
-                    <a href="#" class="inline-block mt-4 text-[10px] border border-purple-dark px-4 py-1.5 rounded-full text-purple-dark hover:bg-purple-dark hover:text-white transition-all">Lihat Peta</a>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block mt-6 text-[10px] font-bold uppercase tracking-widest bg-purple-dark/10 border border-purple-dark/20 px-8 py-2.5 rounded-full text-purple-dark active:bg-purple-dark active:text-white transition-all">Lihat Peta</a>
                 </div>
             </div>
         </section>
 
-        <!-- GALLERY - 6 Photos Now -->
-        <section class="py-16 bg-white px-4">
-            <div class="text-center mb-8" data-aos="fade-down">
+        <!-- GALLERY SWIPER -->
+        <section class="py-16 bg-white">
+            <div class="text-center mb-8 px-4" data-aos="fade-down">
                 <h2 class="text-2xl font-playfair text-purple-dark italic">Gallery Moment</h2>
+                <p class="text-[10px] text-gray-400 mt-2 tracking-widest uppercase">Kisah Dalam Lensa</p>
             </div>
-            <div class="max-w-xl mx-auto rounded-2xl overflow-hidden shadow-lg" data-aos="zoom-in">
-                <div class="swiper mySwiperMain">
+            <div class="w-full max-w-sm mx-auto px-4" data-aos="zoom-in">
+                <div class="swiper mySwiperMain rounded-3xl overflow-hidden shadow-2xl h-[400px]">
                     <div class="swiper-wrapper">
-                        <!-- Slide 1 -->
-                        <div class="swiper-slide"><img src="foto (5).jpg" class="h-[300px] w-full object-cover"></div>
-                        <!-- Slide 2 -->
-                        <div class="swiper-slide"><img src="foto (6).jpg" class="h-[300px] w-full object-cover"></div>
-                        <!-- Slide 3 -->
-                        <div class="swiper-slide"><img src="foto (6).jpg" class="h-[300px] w-full object-cover"></div>
-                        <!-- Slide 4 - NEW -->
-                        <div class="swiper-slide"><img src="foto (3).jpg" class="h-[300px] w-full object-cover"></div>
-                        <!-- Slide 5 - NEW -->
+                        <div class="swiper-slide"><img src="foto (5).jpg"></div>
+                        <div class="swiper-slide"><img src="foto (6).jpg"></div>
+                        <div class="swiper-slide"><img src="foto (3).jpg"></div>
+                        <div class="swiper-slide"><img src="foto (4).jpg"></div>
                         <div class="swiper-slide"><img src="foto.jpg"></div>
-                        <!-- Slide 6 - NEW -->
-                        <div class="swiper-slide"><img src="foto (5).jpg" class="h-[300px] w-full object-cover"></div>
+                        <div class="swiper-slide"><img src="foto (5).jpg"></div>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
 
-        <!-- GIFT - More Compact -->
+        <!-- GIFT SECTION -->
         <section class="py-16 px-4 bg-lavender">
-            <div class="max-w-xs mx-auto bg-white p-8 rounded-3xl shadow-lg text-center border-t-4 border-purple-dark" data-aos="fade-up">
-                <i class="fa-solid fa-gift text-2xl text-purple-dark mb-4 block"></i>
+            <div class="max-w-xs mx-auto bg-white p-8 rounded-[2rem] shadow-lg text-center border-t-4 border-purple-dark" data-aos="fade-up">
+                <div class="w-12 h-12 bg-lavender rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-gift text-xl text-purple-dark"></i>
+                </div>
                 <h3 class="text-lg font-serif text-purple-dark mb-1">Wedding Gift</h3>
                 <p class="text-[10px] text-gray-400 mb-6 italic">Tanda kasih untuk kami:</p>
-                <div class="p-4 bg-lavender rounded-xl">
-                    <p class="text-xs font-bold tracking-widest text-purple-dark">BANK BCA</p>
-                    <p class="text-sm font-bold my-1">123 4567 890</p>
-                    <p class="text-[10px] text-gray-500">a.n Aris Setiawan</p>
-                    <button onclick="copyToClipboard('1234567890')" class="mt-3 text-[9px] font-bold text-purple-dark uppercase tracking-tighter"><i class="fa-regular fa-copy mr-1"></i> Salin Rekening</button>
+                <div class="p-5 bg-lavender/50 rounded-2xl border border-purple-dark/10">
+                    <p class="text-[10px] font-bold tracking-[0.2em] text-purple-dark mb-1">BANK BCA</p>
+                    <p class="text-base font-bold text-gray-700">123 4567 890</p>
+                    <p class="text-[10px] text-gray-500 mt-1 uppercase">a.n Aris Setiawan</p>
+                    <button onclick="copyToClipboard('1234567890')" class="mt-4 w-full py-2.5 bg-purple-dark text-white rounded-xl text-[10px] font-bold uppercase tracking-widest active:scale-95 transition-all">
+                        <i class="fa-regular fa-copy mr-1"></i> Salin Nomor
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- COMMENT - Compact -->
+        <!-- COMMENT SECTION -->
         <section class="py-16 px-4 bg-white">
-            <div class="max-w-xl mx-auto">
-                <div class="bg-lavender p-6 rounded-2xl shadow-sm mb-8" data-aos="fade-up">
-                    <h3 class="text-lg font-serif text-purple-dark mb-4 text-center">Ucapan & Doa</h3>
-                    <form id="commentForm" class="space-y-3">
-                        <input type="text" id="userName" placeholder="Nama" class="w-full p-3 text-sm border-0 rounded-xl shadow-sm outline-none" required>
-                        <textarea id="userMessage" placeholder="Pesan anda..." class="w-full p-3 text-sm border-0 rounded-xl shadow-sm h-20 outline-none" required></textarea>
-                        <button type="submit" class="w-full bg-purple-dark text-white py-3 rounded-xl text-sm font-bold shadow-md">Kirim Ucapan</button>
+            <div class="max-w-md mx-auto">
+                <div class="bg-lavender/50 p-6 rounded-[2rem] shadow-sm mb-8 border border-purple-dark/5" data-aos="fade-up">
+                    <h3 class="text-lg font-serif text-purple-dark mb-6 text-center italic">Kirim Ucapan & Doa</h3>
+                    <form id="commentForm" class="space-y-4">
+                        <input type="text" id="userName" placeholder="Nama Lengkap" class="w-full p-4 text-xs border-0 rounded-2xl shadow-sm outline-none focus:ring-1 focus:ring-purple-dark/20" required>
+                        <textarea id="userMessage" placeholder="Tulis pesan atau doa terbaik anda..." class="w-full p-4 text-xs border-0 rounded-2xl shadow-sm h-24 outline-none focus:ring-1 focus:ring-purple-dark/20" required></textarea>
+                        <button type="submit" class="w-full bg-purple-dark text-white py-4 rounded-2xl text-xs font-bold shadow-lg active:scale-95 transition-all">Kirim Pesan</button>
                     </form>
                 </div>
 
-                <div class="space-y-3" id="comment-list">
-                    <div class="bg-lavender/40 p-4 rounded-xl border-l-2 border-purple-dark">
-                        <p class="font-bold text-xs text-purple-dark">Admin</p>
-                        <p class="text-[11px] text-gray-600 italic mt-1 leading-snug">Selamat untuk Aris & Amira!</p>
+                <div class="space-y-4 px-2" id="comment-list">
+                    <div class="bg-lavender/30 p-4 rounded-2xl border-l-4 border-purple-dark shadow-sm">
+                        <p class="font-bold text-[11px] text-purple-dark">Aris & Amira</p>
+                        <p class="text-[11px] text-gray-600 italic mt-1 leading-snug">Terima kasih banyak atas segala doa dan ucapan rekan-rekan semua.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ADDITIONAL GRID GALLERY - Newest Section -->
+        <!-- GRID GALLERY -->
         <section class="py-16 bg-white px-4">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-8" data-aos="fade-up">
-                    <h2 class="text-2xl font-playfair text-purple-dark italic">Kenangan Indah</h2>
-                    <p class="text-[10px] text-gray-400 mt-2 tracking-widest uppercase">Kebahagiaan yang Terabadikan</p>
+            <div class="max-w-md mx-auto">
+                <div class="text-center mb-10" data-aos="fade-up">
+                    <h2 class="text-2xl font-playfair text-purple-dark italic">Momen Bahagia</h2>
+                    <p class="text-[10px] text-gray-400 mt-2 tracking-widest uppercase">Terabadikan Selamanya</p>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    <div class="overflow-hidden rounded-lg shadow-sm" data-aos="zoom-in">
-                        <img src="foto (3).jpg" alt="Moment 1" class="w-full h-40 object-cover hover:scale-110 transition-transform duration-500">
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="overflow-hidden rounded-2xl shadow-sm h-48" data-aos="zoom-in">
+                        <img src="foto (3).jpg" alt="Moment 1" class="w-full h-full object-cover">
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="foto (4).jpg" alt="Moment 2" class="w-full h-40 object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="overflow-hidden rounded-2xl shadow-sm h-48" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="foto (4).jpg" alt="Moment 2" class="w-full h-full object-cover">
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="200">
-                        <img src="foto (6).jpg" alt="Moment 3" class="w-full h-40 object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="overflow-hidden rounded-2xl shadow-sm h-40 col-span-2" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="foto (6).jpg" alt="Moment 3" class="w-full h-full object-cover">
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="300">
-                        <img src="foto (6).jpg" alt="Moment 4" class="w-full h-40 object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="overflow-hidden rounded-2xl shadow-sm h-48" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="foto.jpg" alt="Moment 4" class="w-full h-full object-cover">
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="400">
-                        <img src="foto.jpg" alt="Moment 5" class="w-full h-40 object-cover hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="overflow-hidden rounded-lg shadow-sm" data-aos="zoom-in" data-aos-delay="500">
-                        <img src="foto (5).jpg" alt="Moment 6" class="w-full h-40 object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="overflow-hidden rounded-2xl shadow-sm h-48" data-aos="zoom-in" data-aos-delay="400">
+                        <img src="foto (5).jpg" alt="Moment 5" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="py-12 bg-purple-dark text-white text-center">
-            <h2 class="font-playfair text-2xl italic mb-2">Aris & Amira</h2>
-            <p class="text-[8px] tracking-[0.4em] font-light opacity-50 uppercase">Sampai Jumpa di Hari Bahagia</p>
+        <footer class="py-16 bg-purple-dark text-white text-center px-6">
+            <h2 class="font-playfair text-3xl italic mb-4">Aris & Amira</h2>
+            <div class="w-16 h-px bg-white/20 mx-auto mb-4"></div>
+            <p class="text-[9px] tracking-[0.5em] font-light opacity-60 uppercase mb-8 leading-loose">
+                Merupakan kehormatan bagi kami jika Bapak/Ibu/Saudara/i berkenan hadir di hari bahagia kami.
+            </p>
+            <p class="text-[8px] opacity-40 uppercase tracking-widest">Dibuat dengan ❤ untuk Aris & Amira</p>
         </footer>
 
     </main>
@@ -330,36 +348,52 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 800, once: true });
 
         const swiperMain = new Swiper(".mySwiperMain", {
-            loop: true, effect: "fade",
-            autoplay: { delay: 3000 },
+            loop: true, 
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            autoplay: { delay: 3500, disableOnInteraction: false },
             pagination: { el: ".swiper-pagination", clickable: true },
         });
 
         function createSakura() {
             const container = document.getElementById('sakura-container');
+            if (container.children.length > 20) return; // Limit for mobile performance
             const sakura = document.createElement('div');
             sakura.className = 'sakura';
-            const size = Math.random() * 8 + 8 + 'px';
+            const size = Math.random() * 6 + 6 + 'px';
             sakura.style.width = size; sakura.style.height = size;
             sakura.style.left = Math.random() * 100 + 'vw';
-            sakura.style.opacity = Math.random() * 0.6 + 0.2;
+            sakura.style.opacity = Math.random() * 0.5 + 0.2;
             sakura.style.backgroundColor = '#fce4ec';
             sakura.style.borderRadius = '100% 0 100% 0';
-            sakura.style.animationDuration = Math.random() * 3 + 5 + 's';
+            sakura.style.animationDuration = Math.random() * 3 + 6 + 's';
             container.appendChild(sakura);
             setTimeout(() => sakura.remove(), 8000);
         }
-        setInterval(createSakura, 400);
+        setInterval(createSakura, 800);
 
         function openInvitation() {
             document.getElementById('cover').classList.add('cover-off');
             document.getElementById('main-content').classList.remove('hidden');
-            document.getElementById('bgMusic').play();
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Auto-play blocked"));
             document.body.style.overflow = 'auto';
-            setTimeout(() => { AOS.refresh(); document.getElementById('cover').style.display = 'none'; }, 1200);
+            setTimeout(() => { 
+                AOS.refresh(); 
+                document.getElementById('cover').style.display = 'none'; 
+            }, 1200);
         }
         document.body.style.overflow = 'hidden';
 
@@ -370,7 +404,12 @@
             el.select();
             document.execCommand('copy');
             document.body.removeChild(el);
-            alert('Berhasil Disalin!');
+            
+            // Minimalist feedback
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Tersalin';
+            setTimeout(() => { btn.innerHTML = originalText; }, 2000);
         }
 
         const commentForm = document.getElementById('commentForm');
@@ -380,14 +419,14 @@
             const name = document.getElementById('userName').value;
             const message = document.getElementById('userMessage').value;
             const newComment = document.createElement('div');
-            newComment.className = 'bg-lavender/40 p-4 rounded-xl border-l-2 border-purple-dark animate-fade-in';
-            newComment.innerHTML = `<p class="font-bold text-xs text-purple-dark">${name}</p><p class="text-[11px] text-gray-600 italic mt-1 leading-snug">${message}</p>`;
+            newComment.className = 'bg-lavender/30 p-4 rounded-2xl border-l-4 border-purple-dark animate-fade-in shadow-sm';
+            newComment.innerHTML = `<p class="font-bold text-[11px] text-purple-dark">${name}</p><p class="text-[11px] text-gray-600 italic mt-1 leading-snug">${message}</p>`;
             commentList.prepend(newComment);
             commentForm.reset();
         });
 
         const targetDate = new Date("Dec 25, 2025 08:00:00").getTime();
-        setInterval(() => {
+        function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
             if (distance > 0) {
@@ -395,7 +434,9 @@
                 document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
                 document.getElementById("minutes").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
             }
-        }, 1000);
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
